@@ -13,6 +13,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import { useRouter } from 'next/navigation'
+ 
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -55,13 +57,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-
+export const revalidate = 0
+export const dynamic = 'force-dynamic'
 export default function SearchAppBar() {
+  const router = useRouter()
   const [posts, setPosts] = React.useState([])
   React.useEffect(() => {
     const fetchData = async () => {
       try {
         const posts = await fetch(`api/data`);
+        router.refresh()
         const jsonPost = await posts.json();
         setPosts(jsonPost.posts)
         console.log(jsonPost.posts)
