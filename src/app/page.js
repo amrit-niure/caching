@@ -14,7 +14,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useRouter } from 'next/navigation'
- 
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -65,7 +65,7 @@ export default function SearchAppBar() {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const posts = await fetch(`api/data`,{cache:"no-store"});
+        const posts = await fetch(`api/data`,{ next: { revalidate: 1 } });
         router.refresh()
         const jsonPost = await posts.json();
         setPosts(jsonPost.posts)
