@@ -1,6 +1,7 @@
 import connectionDB from "@/lib/database";
 import { NextResponse } from "next/server";
 import Post from '@/modal/postSchema'
+import { revalidatePath } from "next/cache";
 
 export async function GET(req){
     try {
