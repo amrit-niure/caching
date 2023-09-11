@@ -65,7 +65,7 @@ export default function SearchAppBar() {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const posts = await fetch(`api/data`);
+        const posts = await fetch(`api/data`,{cache:"no-store"});
         router.refresh()
         const jsonPost = await posts.json();
         setPosts(jsonPost.posts)
